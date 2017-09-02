@@ -1,9 +1,17 @@
 body {
-  padding: 20px;
+  padding: 20px 0;
+  margin: 0;
 }
 
 * {
   box-sizing: border-box;
+}
+
+.main-container {
+  margin: auto;
+  display: flex;
+  width: 50%;
+  justify-content: center;
 }
 
 .form-group {
@@ -20,7 +28,6 @@ ul {
   border: 1px solid #ccc;
   border-top: 0;
   width: 100%;
-  padding: 5px 0;
   max-height: 200px;
   overflow-y: scroll;
 }
@@ -30,6 +37,10 @@ ul {
   cursor: pointer;
 }
 .result:hover {
+  background-color: #eee;
+}
+
+.item__selected {
   background-color: #eee;
 }
 
