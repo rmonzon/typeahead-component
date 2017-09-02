@@ -11,7 +11,7 @@ export default class Autocomplete {
   onQueryChange(query, self) {
     // Get data for the dropdown
     let {url, data, numOfResults} = self.options;
-    if (url) {
+    if (url && query) {
       self.getDataAsync(query).then(response => {
         data = self.parseUsersData(response.items);
         self.updateDropdown(data);
@@ -57,6 +57,7 @@ export default class Autocomplete {
       // Pass the value to the onSelect callback
       el.addEventListener('click', e => {
         this.passInputValueCallback(result);
+
       });
 
       // reset all selected items on mouse hover
@@ -72,7 +73,6 @@ export default class Autocomplete {
 
   createQueryInputEl() {
     const inputEl = document.createElement('input');
-    const {url} = this.options;
     Object.assign(inputEl, {
       type: 'search',
       name: 'query',
@@ -80,6 +80,11 @@ export default class Autocomplete {
     });
 
     if (this.options.url) {
+      // clear the results list when the 'x' is clicked
+      inputEl.addEventListener('search', e => {
+        this.updateDropdown([]);
+      });
+
       inputEl.addEventListener('keyup', e => {
         clearTimeout(this.timer);
         if (e.target.value && e.keyCode !== 40 && e.keyCode !== 38) {
@@ -98,7 +103,7 @@ export default class Autocomplete {
 
       // querying the DOM only if I'm moving up/down the results dropdown
       if (e.keyCode === 40 || e.keyCode === 38 || e.keyCode === 13) {
-        const results = [...document.querySelector(`${url ? '#gh-user' : '#state'} .results`).children];
+        const results = [...document.querySelector(`#${this.rootEl.id} .results`).children];
         switch (e.keyCode) {
           // enter key
           case 13: {
@@ -133,8 +138,7 @@ export default class Autocomplete {
   }
 
   removeHoverColorOfResults() {
-    const {url} = this.options;
-    const results = [...document.querySelector(`${url ? '#gh-user' : '#state'} .results`).children];
+    const results = [...document.querySelector(`#${this.rootEl.id} .results`).children];
     results.map(elem => {
       elem.classList.remove('item__selected');
       return elem;

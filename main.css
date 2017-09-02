@@ -10,12 +10,12 @@ body {
 .main-container {
   margin: auto;
   display: flex;
-  width: 50%;
+  width: 80%;
   justify-content: center;
 }
 
 .form-group {
-  width: 200px;
+  width: 240px;
 }
 
 ul {
@@ -57,4 +57,6 @@ input {
   width: 100%;
   padding: 5px;
   border: 1px solid #ccc;
+  height: 30px;
+  outline: none;
 }

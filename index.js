@@ -24,3 +24,11 @@ new Autocomplete(document.getElementById('gh-user'), {
     console.log('selected github user id:', ghUserId);
   },
 });
+
+// Github Users
+new Autocomplete(document.getElementById('gh2-user'), {
+  url: 'https://api.github.com/search/users',
+  onSelect: (ghUserId) => {
+    console.log('selected github 2 user id:', ghUserId);
+  }
+});
